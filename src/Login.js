@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ login }) => {
+	const history = useHistory();
+
 	const INITIAL_STATE = {
-		email    : '',
+		username : '',
 		password : ''
 	};
 	const [ formData, setFormData ] = useState(INITIAL_STATE);
+	const [ errors, setErrors ] = useState([]);
 
 	const handleChange = (evt) => {
 		const { name, value } = evt.target;
@@ -15,37 +19,61 @@ const Login = () => {
 		}));
 	};
 
-	const handleSubmit = (evt) => {
+	const handleSubmit = async (evt) => {
 		evt.preventDefault();
-		setFormData(INITIAL_STATE);
+		let res = await login(formData);
+		if (res.success) {
+			setFormData(INITIAL_STATE);
+			history.push('/companies');
+		} else setErrors(res.errors);
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div className="Login-email">
-				<label htmlFor="email">Email</label>
-				<input
-					type="text"
-					id="email"
-					name="email"
-					placeholder="Email"
-					onChange={handleChange}
-					value={formData.email}
-				/>
+		<div className="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+			<h2 className="text-success mb-3">Log In</h2>
+			<div className="card">
+				<div className="card-body">
+					<form onSubmit={handleSubmit}>
+						<div className="Login-username form-group">
+							<label htmlFor="username">Username</label>
+							<input
+								type="text"
+								id="username"
+								className="form-control"
+								name="username"
+								placeholder="username"
+								onChange={handleChange}
+								value={formData.username}
+							/>
+						</div>
+						<div className="Login-password form-group">
+							<label htmlFor="password">Password</label>
+							<input
+								className="form-control"
+								type="password"
+								id="password"
+								name="password"
+								placeholder="Password"
+								onChange={handleChange}
+								value={formData.password}
+							/>
+						</div>
+						{errors.length ? (
+							<div className="alert alert-danger" role="alert">
+								{errors.map((error) => (
+									<p className="mb-0 small" key={error}>
+										{error}
+									</p>
+								))}
+							</div>
+						) : null}
+						<button className="btn btn-success float-right" type="submit">
+							Submit
+						</button>
+					</form>
+				</div>
 			</div>
-			<div className="Login-password">
-				<label htmlFor="password">Password</label>
-				<input
-					type="password"
-					id="password"
-					name="password"
-					placeholder="Password"
-					onChange={handleChange}
-					value={formData.password}
-				/>
-			</div>
-			<button type="submit">Submit</button>
-		</form>
+		</div>
 	);
 };
 

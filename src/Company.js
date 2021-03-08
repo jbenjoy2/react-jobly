@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import JoblyApi from './api';
+import JobCardList from './JobCardList';
 import { useParams } from 'react-router-dom';
 const Company = () => {
 	const { handle } = useParams();
@@ -23,7 +24,7 @@ const Company = () => {
 		<div className="Company col-md-8 offset-md-2">
 			<h4>{company.name}</h4>
 			<p>{company.description}</p>
-			<p>JOBS HERE</p>
+			<JobCardList jobs={company.jobs} />
 		</div>
 	);
 };

@@ -46,10 +46,28 @@ class JoblyApi {
 	}
 
 	// obviously, you'll add a lot here ...
-
+	// get list of jobs from database
 	static async getJobs(searchTitle) {
 		let res = await this.request(`jobs`, { title: searchTitle });
 		return res.jobs;
+	}
+
+	// sign up
+	static async signup(data) {
+		let res = await this.request(`auth/register`, data, 'post');
+		return res.token;
+	}
+
+	// login
+	static async login(data) {
+		let res = await this.request(`auth/token`, data, 'post');
+		return res.token;
+	}
+
+	// get current user
+	static async getCurrentUser(username) {
+		let res = await this.request(`users/${username}`);
+		return res.user;
 	}
 }
 
