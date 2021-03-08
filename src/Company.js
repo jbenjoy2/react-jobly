@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import JoblyApi from './api';
 import { useParams } from 'react-router-dom';
-const Company = ({ companies }) => {
+const Company = () => {
 	const { handle } = useParams();
+	const [ company, setCompany ] = useState(null);
 
-	const singleComp = companies.find((company) => company.handle === handle);
+	// async function to get a single company
 
+	useEffect(
+		function getCompanyWithJobs() {
+			const getCompany = async () => {
+				const res = await JoblyApi.getCompany(handle);
+				setCompany(res);
+			};
+			getCompany();
+		},
+		[ handle ]
+	);
+
+	if (!company) return <h1>Loading. . .</h1>;
 	return (
-		<div className="Company">
-			<h1>{singleComp.name}</h1>
+		<div className="Company col-md-8 offset-md-2">
+			<h4>{company.name}</h4>
+			<p>{company.description}</p>
+			<p>JOBS HERE</p>
 		</div>
 	);
 };
