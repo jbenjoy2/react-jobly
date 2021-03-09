@@ -8,6 +8,7 @@ import JobList from './JobList';
 import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
+import Protected from './Protected';
 const companiesList = [
 	{
 		name   : 'Apple',
@@ -35,15 +36,15 @@ function Routes({ login, signUp }) {
 				<Route exact path="/">
 					<Home />
 				</Route>
-				<Route exact path="/companies">
+				<Protected exact path="/companies">
 					<Companies />
-				</Route>
-				<Route exact path="/companies/:handle">
+				</Protected>
+				<Protected exact path="/companies/:handle">
 					<Company companies={companiesList} />
-				</Route>
-				<Route exact path="/jobs">
+				</Protected>
+				<Protected exact path="/jobs">
 					<JobList />
-				</Route>
+				</Protected>
 				<Route exact path="/login">
 					<Login login={login} />
 				</Route>

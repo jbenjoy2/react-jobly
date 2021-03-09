@@ -33,7 +33,7 @@ const Signup = ({ signUp }) => {
 
 	return (
 		<div className="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-			<h2 className="text-success mb-3">Sign Up</h2>
+			<h2 className="text-primary mb-3">Sign Up</h2>
 			<div className="card">
 				<div className="card-body">
 					<form onSubmit={handleSubmit}>
@@ -106,7 +106,7 @@ const Signup = ({ signUp }) => {
 								))}
 							</div>
 						) : null}
-						<button className="btn btn-success float-right" type="submit">
+						<button className="btn btn-primary btn-block" type="submit">
 							Submit
 						</button>
 					</form>

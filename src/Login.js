@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import './Login.css';
 
 const Login = ({ login }) => {
 	const history = useHistory();
@@ -29,9 +30,9 @@ const Login = ({ login }) => {
 	};
 
 	return (
-		<div className="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+		<div className="col-md-6 offset-md-3 col-lg-4 offset-lg-4 Login-card">
 			<h2 className="text-success mb-3">Log In</h2>
-			<div className="card">
+			<div className=" card">
 				<div className="card-body">
 					<form onSubmit={handleSubmit}>
 						<div className="Login-username form-group">

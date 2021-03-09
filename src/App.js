@@ -4,12 +4,13 @@ import Routes from './Routes';
 import Navbar from './Navbar';
 import JoblyApi from './api';
 import UserContext from './Context/UserContext';
+import useLocalStorage from './hooks/useLocalStorageState';
 import jwt from 'jsonwebtoken';
 
 function App() {
 	const [ hasUserInfo, setHasUserInfo ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState(null);
-	const [ token, setToken ] = useState(null);
+	const [ token, setToken ] = useLocalStorage('jobly-token');
 
 	// load info from api
 	useEffect(
