@@ -86,7 +86,7 @@ const Signup = ({ signUp }) => {
 							/>
 						</div>
 						<div className="Signup-email form-group">
-							<label htmlFor="email">Last Name</label>
+							<label htmlFor="email">Email</label>
 							<input
 								type="text"
 								id="email"
